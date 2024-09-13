@@ -20,7 +20,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "Shelves",
+	title: "Bookshelf",
 	description: "Create and share shelves of your favorite books",
 };
 
