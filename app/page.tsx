@@ -1,101 +1,55 @@
-import Image from "next/image";
+export const revalidate = 0;
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import { pinata } from "@/lib/pinata";
+import type { GroupResponseItem } from "pinata";
+import { CreateShelfForm } from "@/components/create-shelf-form";
+import { Suspense } from "react";
+import Link from "next/link";
+import Loading from "./shelf/[group_id]/loading";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+async function fetchData() {
+	try {
+		const groups = await pinata.groups.list();
+		console.log(groups);
+		if (groups.groups === null) {
+			return [];
+		}
+		return groups.groups;
+	} catch (error) {
+		console.log(error);
+		return [];
+	}
+}
+
+export default async function Home() {
+	const groups = await fetchData();
+	return (
+		<div className="min-h-screen mx-auto">
+			<div className="flex flex-col gap-12 mt-12 items-center justify-start mx-auto font-[family-name:var(--font-geist-sans)] border-4 border-black rounded-md max-w-[500px] py-12">
+				<div className="flex flex-col justify-center items-center">
+					<h1 className="font-[family-name:var(--font-merriweather)] scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+						Bookshelf
+					</h1>
+					<h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+						Create and share your favorite books
+					</h3>
+				</div>
+				<div className="flex flex-col gap-4 mt-12">
+					{groups.length === 0 && <h1>No Shelves yet!</h1>}
+					{groups.map((group: GroupResponseItem) => (
+						<Suspense key={group.id} fallback={<Loading />}>
+							<Link href={`/shelf/${group.id}`}>
+								<div className="p-4 w-full rounded-lg hover:text-gray-500 transition-colors">
+									<h1 className="text-2xl underline underline-offset-[12px]">
+										{group.name}
+									</h1>
+								</div>
+							</Link>
+						</Suspense>
+					))}
+				</div>
+				<CreateShelfForm />
+			</div>
+		</div>
+	);
 }
