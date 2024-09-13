@@ -9,6 +9,7 @@ import Image from "next/image";
 import { AddBook } from "@/components/add-book-search";
 import { Button } from "@/components/ui/button";
 import { restoreSnapshot, bookshelf } from "@/lib/db";
+import { ShareButton } from "@/components/share-button";
 
 type Book = {
 	id: number;
@@ -49,6 +50,7 @@ export default async function Page({
 					<Link href="/">Go Back</Link>
 				</Button>
 				<AddBook groupId={params.group_id} />
+				<ShareButton id={params.group_id} />
 			</div>
 			{books.length === 0 && (
 				<h3 className="text-center">No books yet, add one now!</h3>
