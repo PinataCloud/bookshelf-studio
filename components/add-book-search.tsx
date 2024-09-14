@@ -93,7 +93,7 @@ export function AddBook({ groupId }: { groupId: string }) {
 					<p>Add Book</p>
 				</Button>
 			</DialogTrigger>
-			<DialogContent>
+			<DialogContent className="max-w-[375px] sm:max-w-[500px]">
 				<div className="relative">
 					<Input
 						type="text"

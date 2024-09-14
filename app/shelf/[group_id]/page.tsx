@@ -41,35 +41,37 @@ export default async function Page({
 	console.log(books);
 
 	return (
-		<div className="flex flex-col gap-12 items-center justify-start mt-12 min-h-screen mx-auto font-[family-name:var(--font-geist-sans)]">
-			<h2 className="scroll-m-20  text-3xl font-semibold tracking-tight first:mt-0">
-				{name}
-			</h2>
-			<div className="flex gap-4">
-				<Button asChild>
-					<Link href="/">Go Back</Link>
-				</Button>
-				<AddBook groupId={params.group_id} />
-				<ShareButton id={params.group_id} />
-			</div>
-			{books.length === 0 && (
-				<h3 className="text-center">No books yet, add one now!</h3>
-			)}
-			<div className="grid grid-cols-4 gap-4 mt-12 flex-wrap mx-auto">
-				{books.map((book: Book) => (
-					<div className="p-4 max-w-48" key={book.id}>
-						<Image
-							alt={book.title}
-							src={book.image_url || ""}
-							width={150}
-							height={100}
-						/>
-						<h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
-							{book.title}
-						</h4>
-						<p className="truncate">{book.author}</p>
-					</div>
-				))}
+		<div className="min-h-screen mx-auto">
+			<div className="flex flex-col mx-auto gap-12 items-center justify-start border-4 border-black mt-12 sm:max-w-screen-lg max-w-[375px] p-4 font-[family-name:var(--font-geist-sans)]">
+				<h2 className="scroll-m-20 font-[family-name:var(--font-merriweather)]   text-3xl font-semibold tracking-tight mt-2">
+					{name}
+				</h2>
+				<div className="flex gap-4">
+					<Button asChild>
+						<Link href="/">Go Back</Link>
+					</Button>
+					<AddBook groupId={params.group_id} />
+					<ShareButton id={params.group_id} />
+				</div>
+				{books.length === 0 && (
+					<h3 className="text-center">No books yet, add one now!</h3>
+				)}
+				<div className="grid sm:grid-cols-4 grid-cols-2 gap-4 mt-12 flex-wrap mx-auto">
+					{books.map((book: Book) => (
+						<div className="p-4 max-w-48" key={book.id}>
+							<Image
+								alt={book.title}
+								src={book.image_url || ""}
+								width={150}
+								height={100}
+							/>
+							<h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
+								{book.title}
+							</h4>
+							<p className="truncate">{book.author}</p>
+						</div>
+					))}
+				</div>
 			</div>
 		</div>
 	);

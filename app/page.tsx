@@ -25,12 +25,12 @@ export default async function Home() {
 	const groups = await fetchData();
 	return (
 		<div className="min-h-screen mx-auto">
-			<div className="flex flex-col gap-12 mt-12 items-center justify-start mx-auto font-[family-name:var(--font-geist-sans)] border-4 border-black rounded-md max-w-[500px] py-12">
+			<div className="flex flex-col gap-12 mt-12 items-center justify-start mx-auto font-[family-name:var(--font-geist-sans)] border-4 border-black rounded-md max-w-[375px] sm:max-w-[500px] py-12">
 				<div className="flex flex-col justify-center items-center">
-					<h1 className="font-[family-name:var(--font-merriweather)] scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+					<h1 className="font-[family-name:var(--font-merriweather)] scroll-m-20 font-extrabold tracking-tight text-5xl">
 						Bookshelf
 					</h1>
-					<h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+					<h3 className="scroll-m-20 sm:text-2xl text-xl px-2 font-semibold tracking-tight">
 						Create and share your favorite books
 					</h3>
 				</div>
