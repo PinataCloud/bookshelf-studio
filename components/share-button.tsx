@@ -1,21 +1,30 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { CheckIcon, Link2Icon } from "@radix-ui/react-icons";
+import { useState } from "react";
 
 export function ShareButton({ id }: { id: string }) {
-	const copyToClipboard = async (text: string) => {
-		try {
-			await navigator.clipboard.writeText(text);
-			console.log("Text copied to clipboard");
-		} catch (err) {
-			console.error("Failed to copy text: ", err);
-		}
-	};
+	const [copied, setCopied] = useState(false);
 
-	const handleShare = () => {
-		const shareUrl = `http://localhost:3000/shelf/${id}`;
-		copyToClipboard(shareUrl);
-	};
+	const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
-	return <Button onClick={handleShare}>Share</Button>;
+	async function handleCopy() {
+		setCopied(true);
+		await wait();
+		setCopied(false);
+	}
+
+	async function copyToClipboard() {
+		navigator.clipboard
+			.writeText(`https://bookshelf.studio/shelf/${id}`)
+			.then(async () => await handleCopy())
+			.catch(() => alert("Failed to copy"));
+	}
+
+	return (
+		<Button onClick={copyToClipboard} type="submit" className="flex gap-3">
+			{copied ? "Copied!" : "Copy Link"}
+		</Button>
+	);
 }

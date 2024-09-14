@@ -40,7 +40,7 @@ export default async function Home() {
 						<Suspense key={group.id} fallback={<Loading />}>
 							<Link href={`/shelf/${group.id}`}>
 								<div className="p-4 w-full rounded-lg hover:text-gray-500 transition-colors">
-									<h1 className="text-2xl underline underline-offset-[12px]">
+									<h1 className="text-2xl font-semibold underline underline-offset-[12px]">
 										{group.name}
 									</h1>
 								</div>
