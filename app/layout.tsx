@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 	title: "Bookshelf",
 	description: "Create and share shelves of your favorite books",
 	icons: {
-		apple: "/favicon.ico",
+		apple: "/appple-touch-icon.png",
 		shortcut: "/favicon.ico",
 		icon: "/favicon.ico",
 	},
