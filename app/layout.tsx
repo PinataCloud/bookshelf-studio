@@ -22,6 +22,24 @@ const geistMono = localFont({
 export const metadata: Metadata = {
 	title: "Bookshelf",
 	description: "Create and share shelves of your favorite books",
+	icons: {
+		apple: "/favicon.ico",
+		shortcut: "/favicon.ico",
+		icon: "/favicon.ico",
+	},
+	openGraph: {
+		title: "Bookshelf",
+		description: "Create and share shelves of your favorite books",
+		url: "https://bookshelf.studio",
+		siteName: "Bookshelf",
+		images: ["https://www.bookshelf.studio/og.png"],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Bookshelf",
+		description: "Create and share shelves of your favorite books",
+		images: ["https://www.bookshelf.studio/og.png"],
+	},
 };
 
 export default function RootLayout({
