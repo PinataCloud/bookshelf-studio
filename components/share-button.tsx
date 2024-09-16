@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CheckIcon, Link2Icon } from "@radix-ui/react-icons";
 import { useState } from "react";
 
 export function ShareButton({ id }: { id: string }) {

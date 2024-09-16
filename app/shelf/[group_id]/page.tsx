@@ -1,9 +1,7 @@
 export const revalidate = 0;
 
 import { pinata } from "@/lib/pinata";
-import { PGlite } from "@electric-sql/pglite";
 import { drizzle } from "drizzle-orm/pglite";
-import { pgTable, serial, text } from "drizzle-orm/pg-core";
 import Link from "next/link";
 import Image from "next/image";
 import { AddBook } from "@/components/add-book-search";
@@ -42,7 +40,7 @@ export default async function Page({
 
 	return (
 		<div className="min-h-screen mx-auto">
-			<div className="flex flex-col mx-auto gap-12 items-center justify-start border-4 border-black mt-12 sm:max-w-screen-lg max-w-[375px] p-4 font-[family-name:var(--font-geist-sans)]">
+			<div className="flex flex-col mx-auto gap-12 items-center justify-start border-4 border-black my-12 sm:max-w-screen-lg max-w-[375px] p-4 font-[family-name:var(--font-geist-sans)]">
 				<h2 className="scroll-m-20 font-[family-name:var(--font-merriweather)] text-4xl font-semibold tracking-tight mt-2 underline">
 					{name}
 				</h2>
