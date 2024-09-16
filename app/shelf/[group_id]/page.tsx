@@ -43,7 +43,7 @@ export default async function Page({
 	return (
 		<div className="min-h-screen mx-auto">
 			<div className="flex flex-col mx-auto gap-12 items-center justify-start border-4 border-black mt-12 sm:max-w-screen-lg max-w-[375px] p-4 font-[family-name:var(--font-geist-sans)]">
-				<h2 className="scroll-m-20 font-[family-name:var(--font-merriweather)]   text-3xl font-semibold tracking-tight mt-2">
+				<h2 className="scroll-m-20 font-[family-name:var(--font-merriweather)] text-4xl font-semibold tracking-tight mt-2 underline">
 					{name}
 				</h2>
 				<div className="flex gap-4">

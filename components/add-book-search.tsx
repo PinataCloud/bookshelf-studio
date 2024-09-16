@@ -112,7 +112,7 @@ export function AddBook({ groupId }: { groupId: string }) {
 							{books.map((book) => (
 								<li
 									key={book.id}
-									className="p-2 hover:bg-gray-100 cursor-pointer"
+									className="p-2 flex justify-between gap-1 hover:bg-gray-100 cursor-pointer"
 									onClick={() => addBook(book)}
 									onKeyDown={(e) => {
 										if (e.key === "Enter" || e.key === " ") {
@@ -121,7 +121,15 @@ export function AddBook({ groupId }: { groupId: string }) {
 										}
 									}}
 								>
-									{book.volumeInfo.title}
+									<div className="flex flex-col gap-1">
+										<p>{book.volumeInfo.title}</p>
+										<p className="text-xs">{book.volumeInfo.authors}</p>
+									</div>
+									<img
+										src={book.volumeInfo.imageLinks?.thumbnail}
+										alt={book.id.toString()}
+										className="max-h-16"
+									/>
 								</li>
 							))}
 						</ul>
